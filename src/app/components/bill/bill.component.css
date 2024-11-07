@@ -1,0 +1,91 @@
+.custom-dialog-container {
+    background-color: #f0f4f7;  /* Svetla pozadinska boja */
+    border-radius: 12px;  /* Zaobljeni uglovi dijaloga */
+    padding: 20px;  /* Unutrašnji razmak */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);  /* Sjena za 3D efekat */
+    border: 2px solid #3f51b5;  /* Plavi okvir */
+    max-width: 90vw;  /* Maksimalna širina: 90% viewport-a */
+    min-width: 300px;  /* Minimalna širina */
+    width: auto;  /* Automatska širina prilagođena sadržaju */
+    color: #333;  /* Tamna boja teksta */
+  }
+  
+  /* Stilizacija za mat-dialog-title */
+  .mat-dialog-title {
+    color: #ffffff;
+    background-color: #3f51b5;
+    padding: 10px;
+    border-radius: 10px 10px 0 0;  /* Samo gornji uglovi zaokruženi */
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+  }
+  
+  /* Stilizacija sadržaja unutar dijaloga */
+  .mat-dialog-content {
+    max-height: 400px;  /* Ograničenje visine ako ima mnogo podataka */
+    overflow-y: auto;  /* Omogući skrolovanje ako ima puno stavki */
+    padding: 10px;
+  }
+  
+  /* Stilizacija dugmadi unutar dijaloga */
+  .mat-dialog-actions {
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px;
+  }
+  
+  /* Stilizacija input polja */
+  .mat-form-field {
+    width: 100%;  /* Polja zauzimaju punu širinu */
+    margin-bottom: 15px;  /* Razmak između polja */
+  }
+  .button-custom-green {
+    background-color: #28a745; /* Zelena */
+    color: white;
+}
+.tables-container {
+  display: flex; /* Koristite flexbox za raspored */
+  justify-content: space-between; /* Razmak između tabela */
+}
+
+.table-wrapper {
+  flex: 1; /* Svaka tabela zauzima ravnomeran prostor */
+  margin-right: 20px; /* Razmak između tabela */
+}
+
+.table-wrapper:last-child {
+  margin-right: 0; /* Uklonite desni razmak za poslednju tabelu */
+}
+/* styles.css ili styles.component.css */
+.mat-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.mat-header-cell {
+  background-color: #3f51b5; /* Plava boja za zaglavlja */
+  color: white;
+  font-weight: bold;
+}
+
+.mat-cell {
+  padding: 12px;
+  border: 1px solid #e0e0e0; /* Siva boja za granice */
+}
+
+.mat-header-row {
+  height: 48px; /* Visina redova zaglavlja */
+}
+
+.mat-row {
+  transition: background-color 0.3s;
+}
+
+.mat-row:hover {
+  background-color: #f5f5f5; /* Pozadina kada se pređe mišem */
+}
+
+button {
+  margin-right: 8px; /* Razmak između dugmadi */
+}

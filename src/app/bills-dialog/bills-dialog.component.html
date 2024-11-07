@@ -1,0 +1,104 @@
+
+<h2 mat-dialog-title>{{ isEditMode ? 'Izmeni Račun' : 'Dodaj Račun' }}</h2>
+<mat-dialog-content>
+  <form>
+    <mat-form-field appearance="fill">
+      <mat-label>BillID</mat-label>
+      <input matInput type="number" [(ngModel)]="racun.billID" name="billID" disabled>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <span matPrefix>$</span>
+      <mat-label>Cena</mat-label>
+      <input matInput type="number" [(ngModel)]="racun.price" name="price" required disabled >
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Datum</mat-label>
+      <input matInput type="text" [(ngModel)]="racun.date" name="date" required placeholder="YYYY-MM-DD" disabled> 
+    </mat-form-field>
+    
+    
+    <!-- <mat-form-field appearance="fill">
+      <mat-label>Status</mat-label>
+      <mat-select [(ngModel)]="racun.statusId" (selectionChange)="onStatusChange($event)" name="status"
+                  [disabled]="racun.statusId === 1 || racun.statusId === 3"> 
+        <mat-option *ngFor="let status of statuses" [value]="status.statusId">
+          {{ status.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>  -->
+ 
+    <mat-form-field appearance="fill">
+      <mat-label>Status</mat-label>
+      <mat-select [(ngModel)]="racun.statusId" (selectionChange)="onStatusChange($event)" name="status"
+                  [disabled]="racun.statusId === 1 || racun.statusId === 3"> 
+        <mat-option *ngFor="let status of statuses" [value]="status.statusId">
+          {{ status.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    
+    
+    
+    
+     
+    <div *ngFor="let stavka of stavke; let i = index">
+      <h3>Stavka {{ i + 1 }}</h3>
+      
+      <mat-form-field appearance="fill">
+        <mat-label>Total</mat-label>
+        <input matInput type="number" [(ngModel)]="stavka.total" name="total{{i}}" disabled>
+        <span matPrefix>$</span>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Cena</mat-label>
+        <span matPrefix>$</span>
+        <input matInput type="number" [(ngModel)]="stavka.price" (ngModelChange)="calculateTotal(stavka)" name="price{{i}}" disabled>
+      </mat-form-field>
+     
+
+
+       <mat-form-field appearance="fill">
+    <mat-label>Proizvod</mat-label>
+    <input matInput type="text" [value]="getProductName(stavka.productID)" disabled>
+  </mat-form-field> 
+      
+      <mat-form-field appearance="fill">
+        <mat-label>Količina</mat-label>
+        <input matInput type="number" [value]="stavka.kolicina" 
+        (input)="setQuantity(stavka, $event)" 
+        min="0" max="{{ maxQuantity }}">
+       
+
+ 
+      </mat-form-field>
+       <!-- <select name="Proizvod" class="form-control" (change)="onProductChange($event, i)"> 
+        <option value="">SELECT</option>
+        <option *ngFor="let product of products" [value]="product.productID">
+          {{ product.name }}
+        </option>
+      </select> -->
+      <mat-form-field appearance="fill">
+        <mat-label>Proizvod</mat-label>
+        <mat-select [(value)]="stavka.productID" (selectionChange)="onProductChange($event, i)">
+          <mat-option value="">SELECT</mat-option>
+          <ng-container *ngFor="let product of products">
+            <mat-option [value]="product.productID">{{ product.name }}</mat-option>
+          </ng-container>
+        </mat-select>
+      </mat-form-field>
+      
+      <button mat-button color="warn" (click)="removeStavka(i)" *ngIf="stavke.length > 1">Obriši stavku</button>
+    </div>
+
+    <button mat-button (click)="addStavka()">Dodaj stavku</button>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="cancel()">Otkaži</button>
+  <button mat-raised-button color="primary" (click)="save()">Sačuvaj</button>
+</mat-dialog-actions>
+

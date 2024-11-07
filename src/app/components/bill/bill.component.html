@@ -1,0 +1,96 @@
+
+  <div *ngIf="showDetails">
+    <app-bills-items [racunId]="racunId" (onClose)="onRacunConfirm($event)"></app-bills-items>
+  </div>
+  <div *ngIf="!showDetails">
+    <button color="primary" mat-raised-button (click)="getAllData()">Prikaži podatke</button>
+    <button color="warn" mat-raised-button (click)="showRacunDetails(0)">Dodaj račun</button>
+  
+    <div class="tables-container">
+      <div class="table-wrapper">
+        <mat-table [dataSource]="dataSource">
+          <ng-container matColumnDef="billID">
+            <mat-header-cell *matHeaderCellDef> BillID </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.billID}} </mat-cell>
+          </ng-container>
+  
+          <ng-container matColumnDef="price">
+            <mat-header-cell *matHeaderCellDef>Price</mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{ element.price }} </mat-cell>
+          </ng-container>
+  
+          <ng-container matColumnDef="date">
+            <mat-header-cell *matHeaderCellDef> Datum </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{ element.date | date: 'short' }} </mat-cell>
+          </ng-container>
+  
+          <!-- <ng-container matColumnDef="statusId">
+            <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{ element.statusId }} </mat-cell>
+          </ng-container> -->
+          <ng-container matColumnDef="statusName">
+            <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
+            <mat-cell *matCellDef="let element"> 
+              {{ getStatusName(element.statusId) }} 
+            </mat-cell>
+          </ng-container>
+          
+  
+          <ng-container matColumnDef="akcije">
+            <mat-header-cell *matHeaderCellDef>Akcije</mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              <button mat-raised-button color="primary" (click)="showRacunDetails(element.billID)">Detalji</button>
+              <button mat-raised-button color="warn" (click)="removeBill(element)">Obriši</button>
+
+            </mat-cell>
+          </ng-container>
+  
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+      </div>
+  
+      
+  <div class="table-wrapper">
+    <h2>Lista Proizvoda</h2>
+  
+    <input type="text" [(ngModel)]="searchName" placeholder="Pretraži po imenu" (ngModelChange)="getProducts()" />
+    <select [(ngModel)]="sort" (change)="getProducts()">
+      <option value="">Sortiraj po imenu</option>
+      <option value="priceAsc">Cena - Rastuće</option>
+      <option value="priceDesc">Cena - Opadajuće</option>
+    </select>
+  
+    <!-- Polja za unos novog proizvoda -->
+    <div class="add-product-form">
+      <input type="text" [(ngModel)]="newProductName" placeholder="Naziv Proizvoda" />
+      <input type="number" [(ngModel)]="newProductPrice" placeholder="Unesite cenu" min="0" max="10000" step="0.01" />
+      <div *ngIf="newProductPrice && newProductPrice > 10000" class="error">
+        Maksimalna dozvoljena cena je 10,000.
+      </div>
+      <button (click)="addProduct()">Dodaj Proizvod</button>
+    </div>
+  
+    <mat-table [dataSource]="products | productFilter:searchName:sort" class="mat-elevation-z8">
+      <ng-container matColumnDef="productID">
+        <mat-header-cell *matHeaderCellDef> ProizvodID </mat-header-cell>
+        <mat-cell *matCellDef="let product"> {{product.productID}} </mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef> Naziv Proizvoda </mat-header-cell>
+        <mat-cell *matCellDef="let product"> {{product.name}} </mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="price">
+        <mat-header-cell *matHeaderCellDef> Cena </mat-header-cell>
+        <mat-cell *matCellDef="let product"> {{product.price}} </mat-cell>
+      </ng-container>
+  
+      <mat-header-row *matHeaderRowDef="['productID', 'name', 'price']"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: ['productID', 'name', 'price'];"></mat-row>
+    </mat-table>
+  </div>
+
+
+

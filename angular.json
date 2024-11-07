@@ -35,7 +35,11 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+             "@angular/material/prebuilt-themes/deeppurple-amber.css",
+              "src/styles.css",
+              "node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "node_modules/tailwindcss/tailwind.css"
+             
             ],
             "scripts": []
           },
@@ -94,12 +98,17 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "src/styles.css",
+              "node_modules/tailwindcss/tailwind.css"
             ],
             "scripts": []
           }
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "e58a41fc-957d-4803-9dfa-df65c31d9208"
   }
 }

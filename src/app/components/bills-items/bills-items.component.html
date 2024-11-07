@@ -1,0 +1,22 @@
+<div *ngIf="racun">
+  <h3>Detalji Računa</h3>
+  
+  <div>
+    <label for="billID">ID Računa:</label>
+    <input id="billID" type="number" [(ngModel)]="racun.billID"  required>
+  </div>
+
+  <div>
+    <label for="price">Cena:</label>
+    <input id="price" type="number" [(ngModel)]="racun.price" required>
+  </div>
+  <div *ngIf="status">
+    <label for="statusName">Naziv:</label>
+    <input id="statusName" type="text" [(ngModel)]="status.name" readonly />
+  </div>
+  
+  <div>
+    <label for="date">Datum:</label>
+    <input id="date" type="datetime-local" [(ngModel)]="racun.date" required>
+  </div>
+  
